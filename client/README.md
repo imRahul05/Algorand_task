@@ -1,32 +1,52 @@
-# Algo-Sender Frontend
+# 🚀 Algo-Sender Frontend
 
-This is the frontend for the Algo-Sender application, a modern and responsive web interface for sending and tracking transactions on the Algorand TestNet. It is built with React, Vite, and TypeScript, and styled with Tailwind CSS.
+A modern UI for sending and tracking **Algorand TestNet** transactions. Built with **React + Vite + TypeScript + Tailwind**, designed for speed & simplicity.
 
-## Features
+---
 
--   **Modern User Interface**: A clean, responsive, and intuitive UI that works seamlessly on all devices.
--   **Dark & Light Modes**: Switch between themes for your viewing comfort.
--   **Send Transactions**: An easy-to-use form to create and send ALGO transactions on the TestNet.
--   **Real-time Tracking**: A transaction list that automatically polls the backend to update the confirmation status of pending transactions.
--   **Instant Feedback**: Toast notifications provide immediate feedback on transaction submissions and confirmations.
--   **Client-Side Validation**: The form validates addresses and mnemonics instantly in the browser before submission.
--   **Direct Explorer Links**: Each transaction ID links directly to the `allo.info` block explorer for detailed verification.
+## 🌟 Features
 
-## Technology Stack
+<p>
+  <img src="https://img.shields.io/badge/Dark%20%2F%20Light%20Mode-000000?logo=windows-terminal&logoColor=white" />
+  <img src="https://img.shields.io/badge/Send%20ALGO-4B89FF?logo=algorand&logoColor=white" />
+  <img src="https://img.shields.io/badge/Real--Time%20Transaction%20Tracking-4ade80" />
+  <img src="https://img.shields.io/badge/Client--Side%20Validation-9333EA" />
+  <img src="https://img.shields.io/badge/Toast%20Notifications-FCD34D" />
+  <img src="https://img.shields.io/badge/Responsive%20Design-14B8A6" />
+</p>
 
--   **React 19**: A modern JavaScript library for building user interfaces.
--   **Vite**: A next-generation frontend tooling for a blazing-fast development experience.
--   **TypeScript**: For static type-checking, leading to more robust and maintainable code.
--   **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
--   **Algorand JS SDK**: Loaded via CDN to perform client-side address and mnemonic validation.
+- ✅ Clean & responsive UI  
+- 🌙 Dark & light modes  
+- ⚡ Fast interaction with instant feedback  
+- ⏳ Auto-polling pending transactions  
+- 🧠 Client-side mnemonic & address validation  
+- 🔗 Explorer links for every transaction  
 
-## Prerequisites
+---
 
--   [Node.js](https://nodejs.org/) (v18 or newer)
--   [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
--   A running instance of the [Algo-Sender Backend](../server/README.md).
+## 🧠 Tech Stack
 
-## Getting Started
+<p align="left">
+  <img src="https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB" />
+  <img src="https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=fff" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff" />
+  <img src="https://img.shields.io/badge/TailwindCSS-06B6D4?logo=tailwindcss&logoColor=fff" />
+  <img src="https://img.shields.io/badge/Algorand%20SDK-000000?logo=algorand&logoColor=fff" />
+</p>
+
+---
+
+## 📦 Prerequisites
+
+- Node.js ≥ 18
+- npm or yarn
+- Running backend server (Algo-Sender API)
+
+---
+
+
+
+## ⚙️ Setup & Install
 
 Follow these steps to get the frontend development server running on your local machine.
 

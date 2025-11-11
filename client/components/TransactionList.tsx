@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-// FIX: Corrected import path to avoid conflict with empty types.ts file.
 import { Transaction, TransactionStatus } from '../types/index';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from './ui/Card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/Table';
