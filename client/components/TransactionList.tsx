@@ -55,7 +55,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions }
                                 {sortedTransactions.map(tx => (
                                     <TableRow key={tx._id}>
                                         <TableCell>
-                                            <a href={`https://testnet.allo.info/tx/${tx.txId}`} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline font-mono text-xs">
+                                            <a href={`https://testnet.explorer.perawallet.app/tx/${tx.txId}`} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline font-mono text-xs">
                                                 {formatAddress(tx.txId)}
                                             </a>
                                         </TableCell>
