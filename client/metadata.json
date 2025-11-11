@@ -1,0 +1,5 @@
+{
+  "name": "Algorand TestNet Transaction Sender",
+  "description": "A full-stack web application to send and confirm Algorand TestNet transactions. Users can submit transactions via a React frontend, which are then processed and stored, with status tracking.",
+  "requestFramePermissions": []
+}

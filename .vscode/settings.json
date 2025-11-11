@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.dbclient-js": "javascript",
+        "flake.lock": "json",
+        "plyconfig.json": "jsonc"
+    }
+}
