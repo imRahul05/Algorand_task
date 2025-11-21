@@ -1,7 +1,8 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Transaction, TransactionStatus } from '../types/index';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from './ui/Card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/Table';
+import { Button } from './ui/Button';
 
 interface TransactionListProps {
     transactions: Transaction[];
@@ -26,10 +27,22 @@ const formatAmount = (amount: number) => `${(amount / 1_000_000).toLocaleString(
 const formatDate = (dateStr: string) => new Date(dateStr).toLocaleString();
 
 export const TransactionList: React.FC<TransactionListProps> = ({ transactions }) => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 3;
+
     const sortedTransactions = useMemo(() => 
         [...transactions].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()), 
         [transactions]
     );
+
+    const totalPages = Math.ceil(sortedTransactions.length / itemsPerPage);
+    const currentTransactions = sortedTransactions.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+    );
+
+    const handlePrevious = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
+    const handleNext = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
 
     return (
         <Card>
@@ -39,38 +52,61 @@ export const TransactionList: React.FC<TransactionListProps> = ({ transactions }
             </CardHeader>
             <CardContent>
                 {sortedTransactions.length > 0 ? (
-                    <div className="overflow-x-auto">
-                        <Table>
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHead>Tx ID</TableHead>
-                                    <TableHead>From / To</TableHead>
-                                    <TableHead className="text-right">Amount</TableHead>
-                                    <TableHead className="text-center">Status</TableHead>
-                                    <TableHead className="text-right">Date</TableHead>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                {sortedTransactions.map(tx => (
-                                    <TableRow key={tx._id}>
-                                        <TableCell>
-                                            <a href={`https://testnet.explorer.perawallet.app/tx/${tx.txId}`} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline font-mono text-xs">
-                                                {formatAddress(tx.txId)}
-                                            </a>
-                                        </TableCell>
-                                        <TableCell>
-                                            <div className="flex flex-col font-mono text-xs">
-                                                <span><span className="text-muted-foreground">F:</span> {formatAddress(tx.from)}</span>
-                                                <span><span className="text-muted-foreground">T:</span> {formatAddress(tx.to)}</span>
-                                            </div>
-                                        </TableCell>
-                                        <TableCell className="text-right font-medium">{formatAmount(tx.amount)}</TableCell>
-                                        <TableCell className="text-center"><StatusBadge status={tx.status} /></TableCell>
-                                        <TableCell className="text-right text-muted-foreground text-xs">{formatDate(tx.createdAt)}</TableCell>
+                    <div className="space-y-4">
+                        <div className="overflow-x-auto">
+                            <Table>
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHead>Tx ID</TableHead>
+                                        <TableHead>From / To</TableHead>
+                                        <TableHead className="text-right">Amount</TableHead>
+                                        <TableHead className="text-center">Status</TableHead>
+                                        <TableHead className="text-right">Date</TableHead>
                                     </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
+                                </TableHeader>
+                                <TableBody>
+                                    {currentTransactions.map(tx => (
+                                        <TableRow key={tx._id}>
+                                            <TableCell>
+                                                <a href={`https://testnet.explorer.perawallet.app/tx/${tx.txId}`} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline font-mono text-xs">
+                                                    {formatAddress(tx.txId)}
+                                                </a>
+                                            </TableCell>
+                                            <TableCell>
+                                                <div className="flex flex-col font-mono text-xs">
+                                                    <span><span className="text-muted-foreground">F:</span> {formatAddress(tx.from)}</span>
+                                                    <span><span className="text-muted-foreground">T:</span> {formatAddress(tx.to)}</span>
+                                                </div>
+                                            </TableCell>
+                                            <TableCell className="text-right font-medium">{formatAmount(tx.amount)}</TableCell>
+                                            <TableCell className="text-center"><StatusBadge status={tx.status} /></TableCell>
+                                            <TableCell className="text-right text-muted-foreground text-xs">{formatDate(tx.createdAt)}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </div>
+                        {totalPages > 1 && (
+                            <div className="flex items-center justify-end space-x-2 py-4">
+                                <Button
+                                    onClick={handlePrevious}
+                                    disabled={currentPage === 1}
+                                    className="h-8 px-3 text-xs"
+                                >
+                                    Previous
+                                </Button>
+                                <span className="text-sm text-muted-foreground">
+                                    Page {currentPage} of {totalPages}
+                                </span>
+                                <Button
+                                    onClick={handleNext}
+                                    disabled={currentPage === totalPages}
+                                    className="h-8 px-3 text-xs"
+                                >
+                                    Next
+                                </Button>
+                            </div>
+                        )}
                     </div>
                 ) : (
                     <div className="text-center py-16 text-muted-foreground">
